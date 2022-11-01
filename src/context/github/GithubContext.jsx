@@ -7,7 +7,7 @@ const UserContext = createContext();
 const github = axios.create({
   baseURL: `https://api.github.com`,
   headers: {
-    Authorization: `token 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`,
+    Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
   },
 });
 
@@ -36,6 +36,7 @@ export const UserProvider = ({ children }) => {
 
   // get Users
   const searchUsers = async (text) => {
+    console.log(process.env.REACT_APP_GITHUB_TOKEN);
     setIsLoading();
     const params = new URLSearchParams({
       q: text,
@@ -55,7 +56,7 @@ export const UserProvider = ({ children }) => {
     const response = await fetch(`https://api.github.com/users/${userName}`, {
       method: "GET",
       headers: {
-        Authorization: `token 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`,
+        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
       },
     });
     if (response.status === 404) {
@@ -80,7 +81,7 @@ export const UserProvider = ({ children }) => {
       {
         method: "GET",
         headers: {
-          Authorization: `token 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`,
+          Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
         },
       }
     );
